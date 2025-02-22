@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Target Group - Coaching Institute</title>
+  <style>
+  /* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+h1, h2, h3 {
+  color: #4CAF50;
+}
+
+a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Header */
+header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+header p {
+  margin: 5px 0 0;
+  font-size: 1.2rem;
+}
+
+/* Navigation Bar */
+nav {
+  background-color: #333;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: white;
+  padding: 14px 20px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+nav a:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Container */
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Feature Box */
+.feature-box {
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feature-box h3 {
+  margin-top: 0;
+  color: #4CAF50;
+}
+
+.feature-box p {
+  margin: 10px 0;
+}
+
+/* Forms */
+form {
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 30px;
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav a {
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  .feature-box {
+    padding: 15px;
+  }
+}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    header, footer {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+    }
+    nav {
+      background-color: #333;
+      overflow: hidden;
+    }
+    nav a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
+    nav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+    .container {
+      padding: 20px;
+    }
+    .feature-box {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+    .feature-box h3 {
+      margin-top: 0;
+    }
+  // ====================
+// Global Variables
+// ====================
+let attendance = [];
+let testResults = [];
+let quizResults = [];
+let examResults = [];
+
+// ====================
+// Daily Lecture
+// ====================
+function loadDailyLecture() {
+  const lectureContent = document.getElementById('lecture-content');
+  const lectureDate = new Date().toLocaleDateString();
+
+  // Example: Load a video lecture
+  lectureContent.innerHTML = `
+    <h3>Daily Lecture - ${lectureDate}</h3>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+    <p>Download PDF: <a href="lecture.pdf" target="_blank">Click Here</a></p>
+  `;
+}
+
+// ====================
+// Daily Test
+// ====================
+function startDailyTest() {
+  const testContainer = document.getElementById('test-container');
+  const questions = [
+    { question: "What is the capital of India?", options: ["Mumbai", "Delhi", "Kolkata", "Chennai"], answer: "Delhi" },
+    { question: "Who is the Prime Minister of India?", options: ["Narendra Modi", "Rahul Gandhi", "Arvind Kejriwal", "Mamata Banerjee"], answer: "Narendra Modi" }
+  ];
+
+  let testHTML = '<h3>Daily Test</h3>';
+  questions.forEach((q, index) => {
+    testHTML += `
+      <div>
+        <p>${index + 1}. ${q.question}</p>
+        ${q.options.map(opt => `<label><input type="radio" name="q${index}" value="${opt}"> ${opt}</label>`).join('')}
+      </div>
+    `;
+  });
+
+  testHTML += `<button onclick="submitTest()">Submit Test</button>`;
+  testContainer.innerHTML = testHTML;
+}
+
+function submitTest() {
+  const selectedAnswers = document.querySelectorAll('input[type="radio"]:checked');
+  let score = 0;
+
+  selectedAnswers.forEach((ans, index) => {
+    const question = document.querySelector(`input[name="q${index}"]:checked`).value;
+    if (question === "Delhi" || question === "Narendra Modi") {
+      score++;
+    }
+  });
+
+  testResults.push({ date: new Date().toLocaleDateString(), score });
+  alert(`You scored ${score}/${selectedAnswers.length}`);
+}
+
+// ====================
+// Daily Quiz
+// ====================
+function startDailyQuiz() {
+  const quizContainer = document.getElementById('quiz-container');
+  const questions = [
+    { question: "What is 2 + 2?", options: ["3", "4", "5", "6"], answer: "4" },
+    { question: "What is the square root of 16?", options: ["2", "4", "6", "8"], answer: "4" }
+  ];
+
+  let quizHTML = '<h3>Daily Quiz</h3>';
+  questions.forEach((q, index) => {
+    quizHTML += `
+      <div>
+        <p>${index + 1}. ${q.question}</p>
+        ${q.options.map(opt => `<label><input type="radio" name="quiz${index}" value="${opt}"> ${opt}</label>`).join('')}
+      </div>
+    `;
+  });
+
+  quizHTML += `<button onclick="submitQuiz()">Submit Quiz</button>`;
+  quizContainer.innerHTML = quizHTML;
+}
+
+function submitQuiz() {
+  const selectedAnswers = document.querySelectorAll('input[type="radio"]:checked');
+  let score = 0;
+
+  selectedAnswers.forEach((ans, index) => {
+    const question = document.querySelector(`input[name="quiz${index}"]:checked`).value;
+    if (question === "4") {
+      score++;
+    }
+  });
+
+  quizResults.push({ date: new Date().toLocaleDateString(), score });
+  alert(`You scored ${score}/${selectedAnswers.length}`);
+}
+
+// ====================
+// Daily Exam
+// ====================
+function scheduleExam() {
+  const examDate = prompt("Enter exam date (YYYY-MM-DD):");
+  if (examDate) {
+    alert(`Exam scheduled for ${examDate}`);
+  }
+}
+
+function displayExamResults() {
+  const resultsContainer = document.getElementById('exam-results');
+  resultsContainer.innerHTML = '<h3>Exam Results</h3>';
+
+  examResults.forEach(result => {
+    resultsContainer.innerHTML += `<p>${result.date}: ${result.score}</p>`;
+  });
+}
+
+// ====================
+// Daily Attendance
+// ====================
+function markAttendance() {
+  const studentName = prompt("Enter your name:");
+  if (studentName) {
+    attendance.push({ date: new Date().toLocaleDateString(), name: studentName });
+    alert(`Attendance marked for ${studentName}`);
+  }
+}
+
+function displayAttendance() {
+  const attendanceContainer = document.getElementById('attendance-records');
+  attendanceContainer.innerHTML = '<h3>Attendance Records</h3>';
+
+  attendance.forEach(record => {
+    attendanceContainer.innerHTML += `<p>${record.date}: ${record.name}</p>`;
+  });
+}
+
+// ====================
+// Progress Tracking (Charts)
+// ====================
+function showProgressChart() {
+  const ctx = document.getElementById('progress-chart').getContext('2d');
+  const chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: testResults.map(result => result.date),
+      datasets: [{
+        label: 'Test Scores',
+        data: testResults.map(result => result.score),
+        borderColor: '#4CAF50',
+        fill: false
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+// ====================
+// Initialize Page
+// ====================
+window.onload = function () {
+  loadDailyLecture();
+  startDailyTest();
+  startDailyQuiz();
+  displayExamResults();
+  displayAttendance();
+  showProgressChart();
+};
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Welcome to Target Group</h1>
+    <p>Your path to success starts here!</p>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About Us</a>
+    <a href="#courses">Courses</a>
+    <a href="#daily-features">Daily Features</a>
+    <a href="#results">Results</a>
+    <a href="#attendance">Attendance</a>
+    <a href="#contact">Contact Us</a>
+    <a href="#login" style="float:right">Login/Signup</a>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <!-- Home Section -->
+    <section id="home">
+      <h2>Home</h2>
+      <p>Welcome to Target Group, where we provide daily lectures, tests, quizzes, and exams to help you achieve your goals.</p>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about">
+      <h2>About Us</h2>
+      <p>Target Group is a leading coaching institute dedicated to helping students excel in their academics. Our experienced faculty and innovative teaching methods ensure success.</p>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses">
+      <h2>Courses</h2>
+      <ul>
+        <li>Mathematics</li>
+        <li>Science</li>
+        <li>English</li>
+        <li>Social Studies</li>
+      </ul>
+    </section>
+
+    <!-- Daily Features Section -->
+    <section id="daily-features">
+      <h2>Daily Features</h2>
+      <div class="feature-box">
+        <h3>Daily Lecture</h3>
+        <p>Watch today's lecture on <a href="#">Mathematics</a>.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Daily Test</h3>
+        <p>Take today's test on <a href="#">Science</a>.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Daily Quiz</h3>
+        <p>Participate in today's quiz on <a href="#">English</a>.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Daily Exam</h3>
+        <p>Attempt today's exam on <a href="#">Social Studies</a>.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Daily Attendance</h3>
+        <p>Mark your attendance <a href="#">here</a>.</p>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results">
+      <h2>Results</h2>
+      <p>Check your latest exam and quiz results:</p>
+      <ul>
+        <li><a href="#">Mathematics Exam Result</a></li>
+        <li><a href="#">Science Quiz Result</a></li>
+      </ul>
+    </section>
+
+    <!-- Attendance Section -->
+    <section id="attendance">
+      <h2>Attendance</h2>
+      <p>View your attendance record:</p>
+      <ul>
+        <li>Mathematics: 90%</li>
+        <li>Science: 85%</li>
+        <li>English: 95%</li>
+      </ul>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>Have questions? Reach out to us!</p>
+      <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message" rows="5" cols="40" required></textarea><br><br>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+    <!-- Login/Signup Section -->
+    <section id="login">
+      <h2>Login/Signup</h2>
+      <form>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Login</button>
+        <button type="button">Signup</button>
+      </form>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Target Group. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
